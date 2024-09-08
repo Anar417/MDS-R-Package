@@ -37,14 +37,14 @@ test_that("mds function works correctly", {
 
 
   # Test that the mds function runs without error
-  result <- mds(example_data, k = 3, distance_method = distance_method)
+  result <- mds(example_data, k = 2, distance_method = distance_method)
   expect_s3_class(result[[2]], "ggplot")  # Check if the result is a ggplot object
 
   # Test if output result is qeual to what is also output by R's implemented cmdscale() function
-  if (is.null(colnames(cmdscale(distance_matrix, k = 3)))) {
+  if (is.null(colnames(cmdscale(distance_matrix, k = 2)))) {
     rownames(result[[1]]) <- NULL
   }
-  expect_equal(result[[1]], cmdscale(distance_matrix, k = 3))
+  expect_equal(result[[1]], cmdscale(distance_matrix, k = 2))
 
   # Check that the number of points in the plot equals the number of columns in the data
   expect_equal(nrow(ggplot_build(result[[2]])$data[[1]]), ncol(example_data))
