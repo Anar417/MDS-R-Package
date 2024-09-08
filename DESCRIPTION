@@ -1,0 +1,13 @@
+Package: MDS
+Type: Package
+Title: Metric Multidimensional Scaling (Principle Coordinate Analysis)
+Version: 0.1.0
+Author: Anar Battaivan
+Maintainer: Anar Battaivan <anar.battaivan@campus.lmu.de>
+Description: This package provides a function for performing metric multidimensional scaling (MDS) and visualizing the results in 2 dimensions.
+Imports:
+    ggplot2
+RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
