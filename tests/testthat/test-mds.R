@@ -25,13 +25,12 @@ test_that("mds function works correctly", {
   # Check that the number of points in the plot equals the number of columns in the data
   expect_equal(nrow(ggplot_build(result[[2]])$data[[1]]), ncol(example_data))
 
-
-
   # Create example data 2
-  example_data <- matrix(rnorm(100), nrow = 10)
+  data("iris")
+  example_data <- iris[, 1:4]
 
   scaled_data <- scale(t(example_data), center = TRUE, scale = TRUE)
-  distance_method <- "manhattan"
+  distance_method <- "euclidean"
   # Compute distance matrix using the initially specified distance method
   distance_matrix <- dist(scaled_data, method = distance_method)
 
@@ -41,7 +40,7 @@ test_that("mds function works correctly", {
   expect_s3_class(result[[2]], "ggplot")  # Check if the result is a ggplot object
 
   # Test if output result is qeual to what is also output by R's implemented cmdscale() function
-  if (is.null(colnames(cmdscale(distance_matrix, k = 2)))) {
+  if (is.null(rownames(cmdscale(distance_matrix, k = 2)))) {
     rownames(result[[1]]) <- NULL
   }
   expect_equal(result[[1]], cmdscale(distance_matrix, k = 2))
